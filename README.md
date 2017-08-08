@@ -1,4 +1,5 @@
-# Identicon
+# Elixicon
+### Easy Breezy Github-Style Default User Icons!
 
 **TODO: Add description**
 
