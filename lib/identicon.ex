@@ -67,7 +67,7 @@ defmodule Identicon do
   def filter_odd_cells(%Identicon.Image{grid: grid} = image) do
     filtered =
       grid
-      |> Enum.filter(fn({value, _}) -> Integer.is_even(value) end )
+      |> Enum.filter(fn({value, _index}) -> Integer.is_even(value) end )
 
     %Identicon.Image{image | grid: filtered}
   end
