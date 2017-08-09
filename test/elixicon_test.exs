@@ -15,4 +15,19 @@ defmodule ElixiconTest do
 
     assert bin === image_binary
   end
+
+  test "encode_image_base64 creates a valid Base64 image with mime type" do
+    base64_image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAD6CAIAAAAHjs1qAAAFm0lEQVR4nO3UwY0cQQwEwf3IG1kpxyUH+GlQvFqCQYQBg+rEfP78+v2d/n7fxTexVdMn/gWe0FY/Ru4PF9/EVk1yf7j4JrZqkvvDxTexVZPcHy6+ia2a5P5w8U1s1ST3h4tvYqsmuT9cfBNbNcn94eKb2KpJ7g8X38RWTXJ/uPgmtmqS+8PFN7FVk9wfLr6JrZrk/nDxTWzVJPeHi29iqya5P1x8E1s1yf3h4pvYqknuDxffxFZNcn+4+Ca2apL7w8U3sVWT3B8uvomtmuT+cPFNbNUk94eLb2KrJrk/XHwTWzXJ/eHim9iqSe4PF9/EVk1yf7j4JrZqkvvDxTexVZPcHy6+ia2a5P5w8U1s1ST3h4tvYqsmuT9cfBNbNcn94eKb2KpJ7g8X38RWTXJ/uPgmtmqS+8PFN7FVk9wfLr6JrZrk/nDxTWzVJPeHi29iqya5P1x8E1s1yf3h4pvYqknuDxffxFZNcn+4+Ca2apL7w8U3sVWT3B8uvomtmuT+cPFNbNUk94eLb2KrJrk/XHwTWzXJ/eHim9iq6Xtzh//uk/4L1Bffhb50RMXJnSnpiIqTO1PSERUnd6akIypO7kxJR1Sc3JmSjqg4uTMlHVFxcmdKOqLi5M6UdETFyZ0p6YiKkztT0hEVJ3empCMqTu5MSUdUnNyZko6oOLkzJR1RcXJnSjqi4uTOlHRExcmdKemIipM7U9IRFSd3pqQjKk7uTElHVJzcmZKOqDi5MyUdUXFyZ0o6ouLkzpR0RMXJnSnpiIqTO1PSERUnd6akIypO7kxJR1Sc3JmSjqg4uTMlHVFxcmdKOqLi5M6UdETFyZ0p6YiKkztT0hEVJ3empCMqTu5MSUdUnNyZko6oOLkzJR1RcXJnSjqi4uTOlHRExcmdKemIipM7U9IRFSd3pqQjKk7uTElHVJzcmZKOqDi5MyUdUXFyZ0o6ouLkzpR0RMXJnSnpiIqT+/onjG+yaCu5r3/C+CaLtpL7+ieMb7JoK7mvf8L4Jou2kvv6J4xvsmgrua9/wvgmi7aS+/onjG+yaCu5r3/C+CaLtpL7+ieMb7JoK7mvf8L4Jou2kvv6J4xvsmgrua9/wvgmi7aS+/onjG+yaCu5r3/C+CaLtpL7+ieMb7JoK7mvf8L4Jou2kvv6J4xvsmgrua9/wvgmi7aS+/onjG+yaCu5r3/C+CaLtpL7+ieMb7JoK7mvf8L4Jou2kvv6J4xvsmgrua9/wvgmi7aS+/onjG+yaCu5r3/C+CaLtpL7+ieMb7JoK7mvf8L4Jou2kvv6J4xvsmgrua9/wvgmi7aS+/onjG+yaCu5r3/C+CaLtpL7+ieMb7JoK7mvf8L4Jou2kvv6J4xvsmgrua9/wvgmi7aS+/onjG+yaCu5r3/C+CaLtpL7+ieMb7JoK7mvf8L4Jou2kvv6J4xvsmgrua9/wvgmi7aS+/onjG+yaCu5r3/C+CaLtpL7+ieMb7JoK7mvf8L4Jou2kvv6J4xvsmgrua9/wvgmi7aS+/onjG+yaKtPfBT4MXLnELlziNw5RO4cIncOkTuHyJ1D5M4hcucQuXOI3DlE7hwidw6RO4fInUPkziFy5xC5c4jcOUTuHCJ3DpE7h8idQ+TOIXLnELlziNw5RO4cIncOkTuHyJ1D5M4hcucQuXOI3DlE7hwidw6RO4fInUPkziFy5xC5c4jcOUTuHCJ3DpE7h8idQ+TOIXLnELlziNw5RO4cIncOkTuHyJ1D5M4hcucQuXOI3DlE7hwidw6RO4fInUPkziFy5xC5c4jcOUTuHCJ3DpE7h8idQ+TOIXLnELlziNw5RO4cIncOkTuHyJ1D5M4hcucQuXOI3DlE7hwidw6RO4fInUPkziFy5xC5c4jcOUTuHCJ3DpE7h8idQ+TOIXLnELlziNw55B+0srOmsAr6+wAAAABJRU5ErkJggg=="
+
+    computed =
+      Elixicon.initialize_image_struct("Timothy")
+      |> Elixicon.pick_rgb
+      |> Elixicon.construct_grid
+      |> Elixicon.filter_odd_cells
+      |> Elixicon.build_pixel_map
+      |> Elixicon.render_image
+      |> Elixicon.encode_image_base64
+
+    assert computed === base64_image
+  end
 end

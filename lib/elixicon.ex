@@ -5,23 +5,58 @@ defmodule Elixicon do
     Generates custom github-style identicon avatar images from strings
   """
 
+  @doc """
+    Generates an Elixicon from a random string.
+  """
+
   def generate do
     Elixicon.random_string
-    |> Elixicon.build_image_struct
+    |> Elixicon.build_image([base64: false])
   end
+
+  @doc """
+    Generates an Elixicon from the passed in `string` argument.
+  """
 
   def generate(string) do
     string
-    |> Elixicon.build_image_struct
+    |> Elixicon.build_image([base64: false])
   end
 
-  def build_image_struct(string) do
+  @doc """
+    Generates a Base64 URL Elixicon from from a random string.
+  """
+
+  def generate_base64 do
+    Elixicon.random_string
+    |> Elixicon.build_image([base64: true])
+  end
+
+  @doc """
+    Generates an Base64 URL Elixicon from the passed in `string` argument.
+  """
+
+  def generate_base64(string) do
     string
-    |> Elixicon.initialize_image_struct
-    |> Elixicon.pick_rgb
-    |> Elixicon.construct_grid
-    |> Elixicon.filter_odd_cells
-    |> Elixicon.build_pixel_map
+    |> Elixicon.build_image([base64: true])
+  end
+
+  def build_image(string, [base64: base64]) do
+    image =
+      string
+      |> Elixicon.initialize_image_struct
+      |> Elixicon.pick_rgb
+      |> Elixicon.construct_grid
+      |> Elixicon.filter_odd_cells
+      |> Elixicon.build_pixel_map
+      |> Elixicon.render_image
+
+      case base64 do
+        true ->
+          Elixicon.encode_image_base64(image)
+        _ ->
+          Elixicon.write_image_to_disk(image, string)
+      end
   end
 
   @doc """
@@ -178,6 +213,28 @@ defmodule Elixicon do
     end
 
     :egd.render(image)
+  end
+
+  @doc """
+    Saves the image to the `/elixicons/` directory in the project folder.
+  """
+
+  @spec write_image_to_disk(binary, String.t) :: atom
+
+  def write_image_to_disk(image_binary, filename) do
+    File.write("./elixicons/#{filename}.png", image_binary)
+  end
+
+  @doc """
+    Converts a binary image to a Base64 URL. Appropriate for creating images that are easy to transport across API contracts as data.
+
+    Note: Since the Base64 URL is too lengthy for documentation, find the assertions for this function in the `test/elixicon_test.exs` file.
+  """
+
+  @spec encode_image_base64(binary) :: binary
+
+  def encode_image_base64(image_binary) do
+    "data:image/png;base64," <> Base.encode64(image_binary)
   end
 
 end
