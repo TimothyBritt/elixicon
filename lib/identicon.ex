@@ -39,6 +39,10 @@ defmodule Identicon do
     |> :binary.bin_to_list
   end
 
+  @doc """
+    Processes a `string` and returns a `struct` of type `%Identicon.Image{}`
+  """
+  @spec generate_image(String.t) :: %Identicon.Image{hex: list}
   def generate_image(string) do
     hex = string
     |> Identicon.bytes_list

@@ -1,9 +1,9 @@
-defmodule Identicon.Mixfile do
+defmodule Elixicon.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :identicon,
+      app: :elixicon,
       version: "0.1.0",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
@@ -23,7 +23,8 @@ defmodule Identicon.Mixfile do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
-      {:egd, github: "erlang/egd"}
+      {:egd, github: "erlang/egd"},
+      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
   end
 end
