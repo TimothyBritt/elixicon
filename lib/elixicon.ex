@@ -10,8 +10,8 @@ defmodule Elixicon do
   """
 
   def generate do
-    Elixicon.random_string
-    |> Elixicon.build_image([base64: false])
+    random_string()
+    |> build_image([base64: false])
   end
 
   @doc """
@@ -20,7 +20,7 @@ defmodule Elixicon do
 
   def generate(string) do
     string
-    |> Elixicon.build_image([base64: false])
+    |> build_image([base64: false])
   end
 
   @doc """
@@ -28,8 +28,8 @@ defmodule Elixicon do
   """
 
   def generate_base64 do
-    Elixicon.random_string
-    |> Elixicon.build_image([base64: true])
+    random_string()
+    |> build_image([base64: true])
   end
 
   @doc """
@@ -38,24 +38,24 @@ defmodule Elixicon do
 
   def generate_base64(string) do
     string
-    |> Elixicon.build_image([base64: true])
+    |> build_image([base64: true])
   end
 
-  def build_image(string, [base64: base64]) do
+  defp build_image(string, [base64: base64]) do
     image =
       string
-      |> Elixicon.initialize_image_struct
-      |> Elixicon.pick_rgb
-      |> Elixicon.construct_grid
-      |> Elixicon.filter_odd_cells
-      |> Elixicon.build_pixel_map
-      |> Elixicon.render_image
+      |> initialize_image_struct
+      |> pick_rgb
+      |> construct_grid
+      |> filter_odd_cells
+      |> build_pixel_map
+      |> render_image
 
       case base64 do
         true ->
-          Elixicon.encode_image_base64(image)
+          encode_image_base64(image)
         _ ->
-          Elixicon.write_image_to_disk(image, string)
+          write_image_to_disk(image, string)
       end
   end
 
@@ -97,7 +97,7 @@ defmodule Elixicon do
 
   def initialize_image_struct(string) do
     hex = string
-    |> Elixicon.bytes_list
+    |> bytes_list
 
     %Elixicon.Image{hex: hex}
   end
@@ -122,8 +122,8 @@ defmodule Elixicon do
 
   ## Examples
 
-    iex> Elixicon.mirror_row([1, 2, 3])
-    [1, 2, 3, 2, 1]
+      iex> Elixicon.mirror_row([1, 2, 3])
+      [1, 2, 3, 2, 1]
   """
 
   def mirror_row([a, b, c]) do
