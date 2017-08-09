@@ -76,7 +76,7 @@ defmodule Elixicon do
     Converts `string` to a list of `byte()s`, each representing the value of one byte.
 
   ## Examples
-      iex> Identicon.bytes_list("Timothy")
+      iex> Elixicon.bytes_list("Timothy")
       [130, 5, 44, 217, 64, 146, 195, 100, 255, 140, 88, 232, 60, 34, 6, 5]
   """
   @spec bytes_list(String.t) :: list
@@ -116,6 +116,15 @@ defmodule Elixicon do
   def pick_rgb(%Elixicon.Image{hex: [ r, g, b | _tail ]} = image) do
     %Elixicon.Image{image | color: {r, g, b}}
   end
+
+  @doc """
+    Takes a list of 3 hex_values, expressed as integers, and returns a list of 5 by mirroring the first two values after the third value.
+
+  ## Examples
+
+    iex> Elixicon.mirror_row([1, 2, 3])
+    [1, 2, 3, 2, 1]
+  """
 
   def mirror_row([a, b, c]) do
     [a, b, c, b, a]
