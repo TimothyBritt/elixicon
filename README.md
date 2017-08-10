@@ -3,6 +3,11 @@
 
 Elixicon allows you to quickly and easily generate default user identity avatar/icons similar to the default avatars you find on Github. You can generate these avatars randomly, or pass a string to derive the avatar image from it.
 
+Like this:
+
+![Elixicon](https://raw.githubusercontent.com/TimothyBritt/elixicon/master/elixicons/Timothy.png)
+
+
 ### Try It In the Shell for Hacking and Profit
 
 Alternatively, if you'd like to tinker with the tool in the shell, you can close this repository:
