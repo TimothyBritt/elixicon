@@ -51,6 +51,22 @@ Both of these functions use a randomly generated string to derive the Elixicon f
   Elixicon.generate_base64("Timothy")
 ```
 
+## Documentation
+
+Currently, this library depends on the erlang :egd library, which is not currently pushed to hex. Because of this, Elixicon and it's documentation cannot be released into the hex ecosystem just yet. I am currently working on a fix for this.
+
+Until then, please feel free to generate and browse the documentation locally:
+
+```shell
+  cd elixicon
+  mix deps.get
+  mix docs
+  cd doc
+  open index.html
+```
+
+Additionally, all the documentation is generated from `@doc` declarations in the `lib/elixicon.ex` file, so you can also browse the code and the tests.
+
 ## Enjoy
 
 You will have beautiful default user avatar icons that users will love!
