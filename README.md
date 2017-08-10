@@ -10,7 +10,7 @@ Like this:
 
 ### Try It In the Shell for Hacking and Profit
 
-Alternatively, if you'd like to tinker with the tool in the shell, you can close this repository:
+Alternatively, if you'd like to tinker with the tool in the shell, you can clone this repository:
 
 ```shell
   git clone https://github.com/TimothyBritt/elixicon.git
